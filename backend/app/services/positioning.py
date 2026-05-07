@@ -28,7 +28,10 @@ def build_positioning(products: list[Product], target_product_id: str = "A") -> 
     length_split = round(median(product.length for product in products), 1)
     width_split = round(median(product.width for product in products), 1)
     cluster_ids, centers = kmeans(products, k=4)
-    target = next(product for product in products if product.product_id == target_product_id)
+    target = next((product for product in products if product.product_id == target_product_id), None)
+    if target is None:
+        target = products[0]
+        target_product_id = target.product_id
 
     positioned: list[PositionedProduct] = []
     quadrant_counts = {name: 0 for name in QUADRANTS.values()}
@@ -63,7 +66,9 @@ def find_similar_products(
     limit: int = 30,
 ) -> list[PositionedProduct]:
     positioning = build_positioning(products, target_product_id)
-    target = next(product for product in positioning.products if product.product_id == target_product_id)
+    target = next((product for product in positioning.products if product.product_id == target_product_id), None)
+    if target is None:
+        target = positioning.products[0]
 
     peers = [
         product

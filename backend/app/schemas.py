@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 
 class Product(BaseModel):
     product_id: str
+    name: str | None = None
     brand: str
     price: int
     length: float = Field(description="총장(cm)")
@@ -12,9 +13,20 @@ class Product(BaseModel):
 
 
 class Review(BaseModel):
+    review_id: str | None = None
     product_id: str
+    product_name: str | None = None
     review_text: str
     rating: int
+    created_at: str | None = None
+    purchase_color: str | None = None
+    purchase_size: str | None = None
+    size_label: str | None = None
+    quality_assessment: str | None = None
+    color_assessment: str | None = None
+    height_cm: float | None = None
+    weight_kg: float | None = None
+    usual_size: str | None = None
 
 
 class PositionedProduct(Product):

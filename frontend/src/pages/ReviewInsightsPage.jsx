@@ -22,7 +22,7 @@ export default function ReviewInsightsPage() {
           <p className="eyebrow">Review Insights</p>
           <h1>카테고리별 리뷰 긍부정 분석</h1>
         </div>
-        <div className="target-badge">Product A vs 경쟁 상품</div>
+        <div className="target-badge">{state.data.target.label} vs 경쟁 상품</div>
       </header>
 
       <section className="review-comparison">

@@ -27,7 +27,11 @@ def build_review_analysis(
     target_product_id: str = "A",
 ) -> tuple[ReviewAnalysisGroup, ReviewAnalysisGroup]:
     positioning = build_positioning(products, target_product_id)
-    target_product = next(product for product in positioning.products if product.product_id == target_product_id)
+    target_product = next((product for product in positioning.products if product.product_id == target_product_id), None)
+    if target_product is None:
+        target_product = positioning.products[0]
+        target_product_id = target_product.product_id
+
     competitor_ids = [
         product.product_id
         for product in positioning.products
@@ -38,7 +42,7 @@ def build_review_analysis(
     competitor_reviews = [review for review in reviews if review.product_id in competitor_ids]
 
     return (
-        analyze_reviews("Product A", [target_product_id], target_reviews),
+        analyze_reviews(f"{target_product.brand} {target_product.product_id}", [target_product_id], target_reviews),
         analyze_reviews("동일 사분면 경쟁 상품", competitor_ids, competitor_reviews),
     )
 

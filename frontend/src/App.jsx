@@ -1,13 +1,15 @@
-import { BarChart3, MessageSquareText, Table2 } from "lucide-react";
+import { BarChart3, MessageSquareText, Table2, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ComparisonPage from "./pages/ComparisonPage.jsx";
 import ReviewInsightsPage from "./pages/ReviewInsightsPage.jsx";
+import AnalysisPage from "./pages/AnalysisPage.jsx";
 
 const PAGES = [
   { id: "dashboard", label: "메인 대시보드", icon: BarChart3, component: DashboardPage },
   { id: "comparison", label: "상품 비교", icon: Table2, component: ComparisonPage },
   { id: "reviews", label: "리뷰 인사이트", icon: MessageSquareText, component: ReviewInsightsPage },
+  { id: "analysis", label: "심층 분석", icon: TrendingUp, component: AnalysisPage },
 ];
 
 export default function App() {

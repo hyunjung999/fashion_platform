@@ -17,21 +17,21 @@ export default function DashboardPage() {
   if (state.loading) return <LoadingState />;
   if (state.error) return <ErrorState message={state.error.message} />;
 
-  const target = state.data.products.find((product) => product.product_id === "A");
+  const target = state.data.products.find((product) => product.product_id === "A") || state.data.products[0];
 
   return (
     <div className="page-stack">
       <header className="page-header">
         <div>
           <p className="eyebrow">Positioning Analysis</p>
-          <h1>자사 상품 시장 포지셔닝</h1>
+          <h1>{target.name ?? `${target.brand} ${target.product_id}`} 시장 포지셔닝</h1>
         </div>
-        <div className="target-badge">Product A 강조 표시</div>
+        <div className="target-badge">{target.product_id} 강조 표시</div>
       </header>
 
       <div className="metric-grid">
-        <MetricCard label="상품 수" value={`${state.mock.product_count}개`} subtext="Product A 포함 Mock 데이터" />
-        <MetricCard label="리뷰 수" value={`${state.mock.review_count}개`} subtext="상품당 5~20개 생성" />
+        <MetricCard label="상품 수" value={`${state.mock.product_count}개`} subtext="실제 리뷰 데이터 기반" />
+        <MetricCard label="리뷰 수" value={`${state.mock.review_count}개`} subtext="zigzag, musinsa 등 플랫폼 리뷰" />
         <MetricCard label="Product A 평점" value={target.rating.toFixed(1)} subtext={`${target.price.toLocaleString()}원`} />
         <MetricCard label="Product A 사분면" value={target.quadrant} subtext={`총장 ${target.length}cm / 통 ${target.width}cm`} />
       </div>

@@ -10,7 +10,11 @@ async function fetchJson(path) {
 
 export const api = {
   getMockData: () => fetchJson("/mock-data"),
-  getPositioning: () => fetchJson("/positioning"),
-  getSimilarProducts: () => fetchJson("/similar-products?product_id=A&limit=40"),
-  getReviewAnalysis: () => fetchJson("/review-analysis?product_id=A"),
+  getPositioning: (productId = "A") => fetchJson(`/positioning?product_id=${productId}`),
+  getSimilarProducts: (productId = "A") => fetchJson(`/similar-products?product_id=${productId}&limit=40`),
+  getReviewAnalysis: (productId = "A") => fetchJson(`/review-analysis?product_id=${productId}`),
+  getLengthAnalysis: () => fetchJson("/length-analysis"),
+  getFitAnalysis: () => fetchJson("/fit-analysis"),
+  getColorAnalysis: () => fetchJson("/color-analysis"),
+  getMaterialAnalysis: () => fetchJson("/material-analysis"),
 };
